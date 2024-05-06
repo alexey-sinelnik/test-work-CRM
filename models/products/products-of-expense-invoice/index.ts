@@ -24,7 +24,7 @@ export class ProductsOfOutgoingInvoice extends Model {
     quantity!: number;
 
     @Column({ type: DataType.STRING, allowNull: false })
-    product_name!: number;
+    product_name!: string;
 
     @ForeignKey(() => OutgoingInvoice)
     document_id!: string;

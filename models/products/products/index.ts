@@ -13,6 +13,9 @@ export class Products extends Model {
     @Column({ type: DataType.STRING })
     name!: string;
 
+    @Column({ type: DataType.INTEGER })
+    quantity!: number;
+
     @HasMany(() => ProductOfIncomingInvoice)
     incomingProducts!: ProductOfIncomingInvoice[];
 

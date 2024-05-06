@@ -11,6 +11,12 @@ export class OutgoingInvoice extends Model {
     @Column({ type: DataType.DATE, allowNull: false, defaultValue: new Date().getDate() })
     date!: Date;
 
+    @Column({ type: DataType.STRING, allowNull: false, defaultValue: "" })
+    status!: string;
+
+    @Column({ type: DataType.STRING, allowNull: false, defaultValue: "" })
+    reason!: string;
+
     @HasMany(() => ProductsOfOutgoingInvoice)
     products!: ProductsOfOutgoingInvoice[];
 }

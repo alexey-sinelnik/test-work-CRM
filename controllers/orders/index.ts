@@ -2,9 +2,10 @@ import { Request, Response } from "express";
 import { createOutgoingInvoice, createIncomingInvoice } from "../../services/orders";
 import { IncomingInvoice } from "../../models/orders/incoming-orders";
 import { OutgoingInvoice } from "../../models/orders/outgoing-invoice";
+import { APIError } from "../../helpers/errorHandling";
 
 const createIncomingOrders = async (req: Request, res: Response): Promise<void> => {
-    const incomingOrder: IncomingInvoice | undefined = await createIncomingInvoice(req.body);
+    const incomingOrder: IncomingInvoice | APIError = await createIncomingInvoice(req.body);
     res.status(201).json(incomingOrder);
 };
 

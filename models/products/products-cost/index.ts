@@ -14,6 +14,6 @@ export class ProductsCost extends Model {
     @Column({ type: DataType.STRING, allowNull: false })
     product_id!: string;
 
-    @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 0 })
+    @Column({ type: DataType.FLOAT, allowNull: false, defaultValue: 0 })
     cost!: number;
 }

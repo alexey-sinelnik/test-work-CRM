@@ -7,10 +7,9 @@ import ordersRouter from "./routes/orders";
 import reportRouter from "./routes/reports";
 import dotenv from "dotenv";
 
-dotenv.config();
-
 const app: Express = express();
 app.use(express.json());
+dotenv.config();
 
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));

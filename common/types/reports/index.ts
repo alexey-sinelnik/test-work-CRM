@@ -1,6 +1,7 @@
 export type IReportResult = {
-    product: string;
+    date?: any;
     sum: number;
+    name?: string;
     cost: number;
     profit: number;
     profitability: number;

@@ -6,13 +6,13 @@ import { OutgoingInvoice } from "../models/orders/outgoing-invoice";
 import { ProductsOfOutgoingInvoice } from "../models/products/products-of-expense-invoice";
 import { ProductsCost } from "../models/products/products-cost";
 
-const connection: Sequelize = new Sequelize({
+export const connection: Sequelize = new Sequelize({
     dialect: "postgres",
     database: "test_crm",
     username: "user",
     password: "password",
     host: "localhost",
-    port: 5432,
+    port: 5435,
     logging: true,
     models: [
         Products,
