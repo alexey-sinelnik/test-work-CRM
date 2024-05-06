@@ -7,11 +7,4 @@ export type IReportResult = {
     profitability: number;
 };
 
-export type IReportTotal = {
-    totalSum: number;
-    totalCost: number;
-    totalProfitability: number;
-    totalProfit: number;
-};
-
-export type Report = IReportTotal | IReportResult;
+export type Report = IReportResult;

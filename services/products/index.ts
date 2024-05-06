@@ -5,7 +5,6 @@ import { connection } from "../../connection";
 import { Products } from "../../models/products/products";
 import { ProductOfIncomingInvoice } from "../../models/products/product-of-incoming-invoice";
 import { ProductsCost } from "../../models/products/products-cost";
-import { OutgoingInvoice } from "../../models/orders/outgoing-invoice";
 import { ProductsOfOutgoingInvoice } from "../../models/products/products-of-expense-invoice";
 import { AppErrors } from "../../common/data/errors";
 import { IFindProductOfIncomingInvoiceByDate, IProduct } from "../../common/types/products";
@@ -279,15 +278,25 @@ const getCostByProduct = async (
     to: string
 ): Promise<ProductsCost[]> => {
     try {
-        return connection.transaction(async (transaction: Transaction): Promise<ProductsCost[]> => {
-            return ProductsCost.findAll({
-                where: {
-                    product_id,
-                    date: { [Op.between]: [from ? from : "", to ? to : new Date(Date.now())] }
-                },
-                transaction
-            });
-        });
+        return await connection.transaction(
+            async (transaction: Transaction): Promise<ProductsCost[]> => {
+                return ProductsCost.findAll({
+                    where: {
+                        product_id,
+                        createdAt: {
+                            [Op.between]: [
+                                from ? from : new Date(0),
+                                to ? to : new Date(Date.now())
+                            ]
+                        }
+                    },
+                    raw: true,
+                    limit: 1,
+                    order: [["createdAt", "DESC"]],
+                    transaction
+                });
+            }
+        );
     } catch (error) {
         throw new APIError(
             HttpErrors.INTERNAL_SERVER,
